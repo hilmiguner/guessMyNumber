@@ -1,6 +1,6 @@
 // REACT NATIVE CORES - BEGIN
 import { useState } from "react";
-import { TextInput, Alert, View, StyleSheet, Text } from "react-native";
+import { TextInput, Alert, View, StyleSheet } from "react-native";
 // REACT NATIVE CORES - END
 
 // CUSTOM CONSTANTS - BEGIN

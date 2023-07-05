@@ -1,6 +1,6 @@
 // REACT NATIVE CORES - BEGIN
 import { useState, useEffect } from "react";
-import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
+import { View, StyleSheet, Alert, FlatList } from "react-native";
 // REACT NATIVE CORES - END
 
 // CUSTOM COMPONENT IMPORTS - BEGIN
@@ -18,12 +18,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 function generateRandomBetween(min, max, exclude) {
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
-    if(rndNum == exclude) {
-        return generateRandomBetween(min, max, exclude);
-    }
-    else {
-        return rndNum;
-    }
+    return rndNum;
 }
 
 let minBoundary = 1; let maxBoundary = 100;
@@ -56,11 +51,6 @@ function GameScreen({ userNumber, onGameOver }) {
             minBoundary = currentGuess + 1;
         }
 
-        if((maxBoundary - minBoundary) == 1) {
-            setCurrentGuess(userNumber);
-            setGuessRounds((prevGuessRounds) => [userNumber, ...prevGuessRounds])
-            return;
-        }
         const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, userNumber);
         setCurrentGuess(newRndNumber);
         setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds])
