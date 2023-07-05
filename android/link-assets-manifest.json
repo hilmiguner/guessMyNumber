@@ -64,6 +64,14 @@
     {
       "path": "Fonts/Zocial.ttf",
       "sha1": "6a48a962b06cc3acbdfd61df0d9a34744eea5e8d"
+    },
+    {
+      "path": "assets/fonts/OpenSans-Bold.ttf",
+      "sha1": "0ad533c702f9ac1de717063040426858662cfbcc"
+    },
+    {
+      "path": "assets/fonts/OpenSans-Regular.ttf",
+      "sha1": "dc9c07303a2392f9ee02fdb636814970753ac94a"
     }
   ]
 }

@@ -8,5 +8,6 @@ module.exports = {
     },
     assets: [
         "./Fonts",
+        "./assets/fonts",
     ],
   };
