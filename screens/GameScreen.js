@@ -12,7 +12,7 @@ import InstructionText from "../components/ui/InstructionText";
 // CUSTOM COMPONENT IMPORTS - END
 
 // THIRD PARTY PACKAGE IMPORTS - BEGIN
-//import Ionicons from "react-native-vector-icons/Ionicons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 // THIRD PARTY PACKAGE IMPORTS - END
 
 function generateRandomBetween(min, max, exclude) {
@@ -63,7 +63,7 @@ function GameScreen({ userNumber, onGameOver }) {
                 <InstructionText style={{marginBottom: 12}}>Lower or Higher</InstructionText>
                 <View style={styles.buttonsContainer}>
                     <View style={styles.button}>
-                        <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>-</PrimaryButton>
+                        <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}><Ionicons name="md-remove" /></PrimaryButton>
                     </View>
                     <View style={styles.button}>
                         <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>+</PrimaryButton>
