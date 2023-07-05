@@ -1,6 +1,6 @@
 // REACT NATIVE CORES - BEGIN
 import { useState, useEffect } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
 // REACT NATIVE CORES - END
 
 // CUSTOM COMPONENT IMPORTS - BEGIN
@@ -9,6 +9,7 @@ import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
+import GuessLogItem from "../components/game/GuessLogItem";
 // CUSTOM COMPONENT IMPORTS - END
 
 // THIRD PARTY PACKAGE IMPORTS - BEGIN
@@ -30,10 +31,17 @@ let minBoundary = 1; let maxBoundary = 100;
 function GameScreen({ userNumber, onGameOver }) {
     const initialGuess = generateRandomBetween(0, 100, userNumber);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
+    const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
     useEffect(() => {
-        if(currentGuess == userNumber) onGameOver();
+        if(currentGuess == userNumber) onGameOver(guessRounds.length);
     }, [currentGuess, userNumber, onGameOver]);
+
+    // When dependency list is empty, function in effect function will run just once when jsx component initialized.
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, [])
 
     function nextGuessHandler(direction) {
         if((direction == "lower" && currentGuess < userNumber) || (direction == "higher" && currentGuess > userNumber)) {
@@ -50,10 +58,12 @@ function GameScreen({ userNumber, onGameOver }) {
 
         if((maxBoundary - minBoundary) == 1) {
             setCurrentGuess(userNumber);
+            setGuessRounds((prevGuessRounds) => [userNumber, ...prevGuessRounds])
             return;
         }
         const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, userNumber);
         setCurrentGuess(newRndNumber);
+        setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds])
     }
     return(
         <View style={styles.screen}>
@@ -74,8 +84,12 @@ function GameScreen({ userNumber, onGameOver }) {
                     </View>
                 </View>
             </Card>
-            <View>
-                {/* GUESS LOG */}
+            <View style={styles.logContainer}>
+                <FlatList 
+                data={guessRounds} 
+                renderItem={(itemData) => <GuessLogItem guess={itemData.item} roundNumber={guessRounds.length - itemData.index}/>}
+                keyExtractor={(item) => item}
+                />
             </View>
         </View>
     );
@@ -93,5 +107,9 @@ const styles = StyleSheet.create({
     },
     button: {
         flex: 1,
+    },
+    logContainer: {
+        flex: 1,
+        padding: 16,
     },
 });

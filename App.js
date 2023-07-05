@@ -20,12 +20,22 @@ import LinearGradient from "react-native-linear-gradient";
 function App() {
   const [userNumber, setUserNumber] = useState();
   const [gameIsOver, setGameIsOver] = useState(false);
+  const [guessRounds, setGuessRounds] = useState(0);
 
   function pickedNumberHandler(pickedNumber) {setUserNumber(pickedNumber)}
 
+  function startNewGameHandler() {
+    setUserNumber(null);
+    setGameIsOver(false);
+    setGuessRounds(0);
+  }
+
   let currentScreen = <StartGameScreen onConfirmNumber={pickedNumberHandler}/>;
-  if(userNumber) currentScreen = <GameScreen userNumber={userNumber} onGameOver={() => setGameIsOver(true)}/>;
-  if(gameIsOver) currentScreen = <GameOverScreen />;
+  if(userNumber) currentScreen = <GameScreen userNumber={userNumber} onGameOver={(numberOfRounds) => {
+    setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
+  }}/>;
+  if(gameIsOver) currentScreen = <GameOverScreen roundsNumber={guessRounds} userNumber={userNumber} onStartNewGame={startNewGameHandler}/>;
 
   return(
     <>
