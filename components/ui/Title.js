@@ -1,5 +1,5 @@
 // REACT NATIVE CORES - BEGIN
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Platform } from "react-native";
 // REACT NATIVE CORES - END
 
 // CUSTOM CONSTANTS - BEGIN
@@ -18,10 +18,10 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: "OpenSans-Bold",
         fontSize: 24,
-        color: Colors.accent500,
+        color: "white",
         textAlign: "center",
-        borderWidth: 2,
-        borderColor: Colors.accent500,
+        borderWidth: Platform.OS === "android" ? 2 : null,
+        borderColor: "white",
         padding: 12,
         maxWidth: "80%",
         width: 300,
